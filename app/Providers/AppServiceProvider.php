@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \Illuminate\Support\Facades\View::composer(
-            ['layouts.app', 'home.index', 'frontend.*', 'errors.*'],
+            ['layouts.app', 'home.*', 'frontend.*', 'errors.*'],
             \App\Http\ViewComposers\FrontendViewComposer::class
         );
     }

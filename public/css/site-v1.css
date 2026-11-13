@@ -1,0 +1,120 @@
+/* =========================================================
+   जिनधर्म संघ — Site chrome v1 (shared by every page)
+   Design tokens + top bar, header, navigation and footer.
+   Classes are prefixed "jd-" so they never clash with Bootstrap.
+   ========================================================= */
+:root {
+    --jd-ink: #1C1917;
+    --jd-ink-2: #44403C;
+    --jd-muted: #57534E;
+    --jd-line: #E7E5E4;
+    --jd-line-2: #F5F5F4;
+    --jd-saffron: #C2410C;
+    --jd-saffron-d: #9A3412;
+    --jd-saffron-dd: #7C2D12;
+    --jd-brown: #431407;
+    --jd-brown-d: #2A0E05;
+    --jd-cream: #FFF7ED;
+    --jd-cream-2: #FFEDD5;
+    --jd-peach: #FED7AA;
+    --jd-peach-2: #FDBA74;
+    --jd-green: #15803D;
+    --jd-serif: 'Noto Serif Devanagari', serif;
+    --jd-sans: 'Mukta', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --jd-wrap: 1240px;
+    --jd-gut: clamp(16px, 4vw, 32px);
+}
+
+.jd-wrap { max-width: var(--jd-wrap); margin: 0 auto; padding-left: var(--jd-gut); padding-right: var(--jd-gut); }
+.jd-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.jd-skip:focus { position: fixed; top: 8px; left: 8px; z-index: 2000; width: auto; height: auto; clip: auto; background: #fff; padding: 10px 16px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.2); }
+
+/* Top bar */
+.jd-topbar { background: var(--jd-cream); border-bottom: 1px solid var(--jd-peach); font-family: var(--jd-sans); font-size: 14px; color: var(--jd-ink); line-height: 1.5; }
+.jd-topbar .jd-wrap { display: flex; flex-wrap: wrap; gap: 6px 24px; align-items: center; justify-content: space-between; padding-top: 8px; padding-bottom: 8px; }
+.jd-topbar .jd-row { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center; }
+.jd-topbar a { color: var(--jd-ink); text-decoration: none; }
+.jd-topbar a:hover { color: var(--jd-saffron-d); text-decoration: underline; }
+.jd-topbar .jd-muted { color: var(--jd-muted); }
+.jd-topbar .jd-fest { color: var(--jd-saffron-d); font-weight: 600; }
+
+/* Header */
+.jd-header { background: #fff; border-bottom: 1px solid var(--jd-line); position: sticky; top: 0; z-index: 1040; font-family: var(--jd-sans); transition: box-shadow .2s; }
+.jd-header.is-scrolled { box-shadow: 0 4px 20px rgba(28, 25, 23, .07); }
+.jd-header .jd-wrap { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; padding-top: 12px; padding-bottom: 12px; }
+.jd-brand { display: flex; gap: 12px; align-items: center; color: var(--jd-ink); text-decoration: none; }
+.jd-brand:hover { color: var(--jd-ink); text-decoration: none; }
+.jd-brand-mark { width: 48px; height: 48px; border-radius: 50%; background: var(--jd-saffron); color: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--jd-serif); font-size: 22px; font-weight: 700; flex: none; }
+.jd-brand-name { font-family: var(--jd-serif); font-size: 23px; font-weight: 700; line-height: 1.2; display: block; color: inherit; }
+.jd-brand-tag { font-size: 13px; color: var(--jd-muted); display: block; line-height: 1.4; }
+.jd-actions { display: flex; gap: 8px; align-items: center; }
+.jd-icon-btn { width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #D6D3D1; background: #fff; color: var(--jd-ink); padding: 0; text-decoration: none; }
+.jd-icon-btn:hover { border-color: var(--jd-peach-2); color: var(--jd-saffron-d); background: var(--jd-cream); }
+.jd-menu-toggle { display: none; }
+
+.jd-nav { display: flex; flex-wrap: wrap; gap: 2px 4px; align-items: center; font-weight: 600; font-size: 16px; margin: 0; padding: 0; list-style: none; }
+.jd-nav > li { position: relative; }
+.jd-nav a { display: inline-flex; align-items: center; gap: 6px; padding: 10px 12px; border-radius: 8px; color: var(--jd-ink); text-decoration: none; white-space: nowrap; }
+.jd-nav a:hover { background: var(--jd-cream); color: var(--jd-saffron-d); text-decoration: none; }
+.jd-nav a.is-active { background: var(--jd-cream); color: var(--jd-saffron-d); }
+.jd-nav .jd-caret { font-size: 10px; opacity: .7; }
+.jd-sub { position: absolute; top: 100%; left: 0; min-width: 220px; background: #fff; border: 1px solid var(--jd-line); border-radius: 12px; box-shadow: 0 14px 32px rgba(28, 25, 23, .12); padding: 6px; margin: 0; list-style: none; opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .15s, transform .15s, visibility .15s; z-index: 1050; }
+.jd-nav > li:hover > .jd-sub, .jd-nav > li:focus-within > .jd-sub { opacity: 1; visibility: visible; transform: translateY(0); }
+.jd-sub a { display: flex; width: 100%; font-weight: 500; font-size: 15px; padding: 10px 12px; }
+
+@media (max-width: 960px) {
+    .jd-menu-toggle { display: inline-flex; }
+    .jd-nav { display: none; width: 100%; flex-direction: column; align-items: stretch; padding-top: 6px; border-top: 1px solid var(--jd-line); }
+    .jd-nav.is-open { display: flex; }
+    .jd-nav a { display: flex; width: 100%; }
+    .jd-sub { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 0; border-left: 2px solid var(--jd-peach); border-radius: 0; margin: 0 0 6px 14px; padding: 0 0 0 6px; min-width: 0; }
+}
+
+/* Footer */
+.jd-footer { background: var(--jd-brown-d); color: var(--jd-peach); font-family: var(--jd-sans); font-size: 16px; line-height: 1.6; }
+.jd-footer a { color: var(--jd-peach); text-decoration: none; }
+.jd-footer a:hover { color: #fff; text-decoration: underline; }
+.jd-join { background: var(--jd-brown); border-bottom: 1px solid #5C1F0A; }
+.jd-join .jd-wrap { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; padding-top: 34px; padding-bottom: 34px; }
+.jd-join h2 { margin: 0; font-family: var(--jd-serif); font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: #fff; line-height: 1.35; }
+.jd-join p { margin: 6px 0 0; font-size: 16px; color: var(--jd-peach); }
+.jd-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 24px; border-radius: 12px; font-family: var(--jd-sans); font-weight: 700; font-size: 16px; text-decoration: none; border: 0; cursor: pointer; }
+.jd-btn:hover { text-decoration: none !important; }
+.jd-btn-green { background: var(--jd-green); color: #fff !important; }
+.jd-btn-green:hover { background: #166534; }
+.jd-btn-saffron { background: var(--jd-saffron); color: #fff !important; }
+.jd-btn-saffron:hover { background: var(--jd-saffron-d); }
+.jd-fcols { display: flex; flex-wrap: wrap; gap: 40px 48px; padding-top: 52px; padding-bottom: 36px; }
+.jd-fbrand { flex: 2 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.jd-fbrand p { margin: 0; line-height: 1.65; max-width: 380px; }
+.jd-social { display: flex; gap: 10px; }
+.jd-social a { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--jd-saffron-dd); color: #fff; display: flex; align-items: center; justify-content: center; }
+.jd-social a:hover { background: var(--jd-saffron-dd); }
+.jd-fcol { flex: 1 1 160px; display: flex; flex-direction: column; gap: 10px; }
+.jd-fcol.is-wide { flex: 1.5 1 240px; min-width: 0; gap: 14px; }
+.jd-fh { font-weight: 700; color: #fff; font-size: 17px; padding-bottom: 8px; margin-bottom: 4px; border-bottom: 2px solid var(--jd-saffron); align-self: flex-start; }
+.jd-fcontact { display: flex; gap: 10px; align-items: flex-start; }
+.jd-fcontact svg { flex: none; color: var(--jd-peach-2); margin-top: 3px; }
+.jd-motto { border-top: 1px solid #5C1F0A; border-bottom: 1px solid #5C1F0A; padding: 22px 0; text-align: center; }
+.jd-motto b { display: block; font-family: var(--jd-serif); font-size: 24px; color: var(--jd-peach-2); }
+.jd-motto small { font-size: 14px; }
+.jd-fbottom { display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: space-between; align-items: center; padding-top: 20px; padding-bottom: 28px; font-size: 14px; }
+.jd-fbottom nav { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+
+.jd-header :focus-visible, .jd-footer :focus-visible, .jd-topbar :focus-visible { outline: 3px solid #F59E0B; outline-offset: 2px; }
+
+/* Small screens: keep the top bar to one compact line */
+@media (max-width: 600px) {
+    .jd-topbar { font-size: 13px; }
+    .jd-topbar .jd-wrap { flex-wrap: nowrap; padding-top: 6px; padding-bottom: 6px; }
+    .jd-topbar .jd-muted, .jd-topbar .jd-fest { display: none; }
+    .jd-topbar .jd-row { flex-wrap: nowrap; white-space: nowrap; }
+    .jd-brand-name { font-size: 20px; }
+    .jd-brand-tag { font-size: 12px; }
+    .jd-brand-mark { width: 42px; height: 42px; font-size: 19px; }
+}
+
+/* Logo image */
+.jd-logo { display: block; height: 64px; width: auto; flex: none; }
+.jd-footer .jd-logo { height: 88px; }
+@media (max-width: 600px) { .jd-header .jd-logo { height: 52px; } }

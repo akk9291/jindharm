@@ -110,11 +110,11 @@
                     </div>
 
                     <!-- PDF Viewer embed if available -->
-                    @if($pdfUrl)
+                    @if($firstPdf)
                         <div class="mt-5 pt-4 border-top">
                             <h4 class="font-spiritual mb-3"><i class="fa-solid fa-file-lines text-danger me-2"></i> ग्रन्थ पीडीएफ पूर्वावलोकन (PDF Viewer)</h4>
                             <div class="ratio ratio-4x3 border rounded-3 overflow-hidden shadow-sm">
-                                <iframe src="{{ $pdfUrl }}" title="{{ $title }} PDF"></iframe>
+                                <iframe src="{{ $firstPdf }}" title="{{ $title }} PDF"></iframe>
                             </div>
                         </div>
                     @endif

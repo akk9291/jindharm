@@ -25,6 +25,8 @@ use App\Http\Controllers\Frontend\QuoteController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home-classic', [HomeController::class, 'classic'])->name('home.classic');
+Route::get('/home-portal', [HomeController::class, 'portalV1'])->name('home.portal');
 
 // Saints & Guru Parampara
 Route::get('/sant', [SaintController::class, 'index'])->name('sants.index');
@@ -76,13 +78,14 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact/send', [PageController::class, 'sendContact'])->name('contact.send');
 
 // Friendly Route Aliases & Redirects
-Route::redirect('/sants', '/sant');
-Route::redirect('/pravachans', '/pravachan');
-Route::redirect('/granths', '/granth');
-Route::redirect('/bhajans', '/bhajan');
-Route::redirect('/panchang', '/jain-panchang');
-Route::redirect('/festivals', '/jain-festivals');
-Route::get('/page/{slug}', fn($slug) => redirect('/pages/' . $slug));
+// (named-route redirects so they also work when the site runs from a subfolder, e.g. localhost/jindharm/public)
+Route::get('/sants', fn() => redirect()->route('sants.index', [], 301));
+Route::get('/pravachans', fn() => redirect()->route('pravachans.index', [], 301));
+Route::get('/granths', fn() => redirect()->route('granths.index', [], 301));
+Route::get('/bhajans', fn() => redirect()->route('bhajans.index', [], 301));
+Route::get('/panchang', fn() => redirect()->route('panchang.index', [], 301));
+Route::get('/festivals', fn() => redirect()->route('festivals.index', [], 301));
+Route::get('/page/{slug}', fn($slug) => redirect()->route('pages.show', $slug, 301));
 
 // Admin Authentication Routes
 Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('login');
